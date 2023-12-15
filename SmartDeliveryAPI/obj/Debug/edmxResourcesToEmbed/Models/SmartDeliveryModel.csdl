@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SmartDeliveryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Auth">
+    <Key>
+      <PropertyRef Name="auth_ID" />
+    </Key>
+    <Property Name="auth_ID" Type="Int32" Nullable="false" />
+    <Property Name="c_login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="c_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="client_ID" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Auth__client_ID__6E01572D" FromRole="Auth" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Bank_Card">
+    <Key>
+      <PropertyRef Name="card_ID" />
+    </Key>
+    <Property Name="card_ID" Type="Int32" Nullable="false" />
+    <Property Name="card_number" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="expiring_date" Type="DateTime" Precision="0" />
+    <Property Name="cvv" Type="Int32" />
+    <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__card_ID__3E52440B" FromRole="Bank_Card" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="client_ID" />
+    </Key>
+    <Property Name="client_ID" Type="Int32" Nullable="false" />
+    <Property Name="data_ID" Type="Int32" />
+    <Property Name="card_ID" Type="Int32" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Auth" Relationship="Self.FK__Auth__client_ID__6E01572D" FromRole="Client" ToRole="Auth" />
+    <NavigationProperty Name="Bank_Card" Relationship="Self.FK__Client__card_ID__3E52440B" FromRole="Client" ToRole="Bank_Card" />
+    <NavigationProperty Name="Personal_Data" Relationship="Self.FK__Client__data_ID__3D5E1FD2" FromRole="Client" ToRole="Personal_Data" />
+    <NavigationProperty Name="Package" Relationship="Self.FK__Package__client___68487DD7" FromRole="Client" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="Courier">
+    <Key>
+      <PropertyRef Name="courier_ID" />
+    </Key>
+    <Property Name="courier_ID" Type="Int32" Nullable="false" />
+    <Property Name="data_ID" Type="Int32" />
+    <Property Name="rating" Type="Int32" />
+    <NavigationProperty Name="Personal_Data" Relationship="Self.FK__Courier__data_ID__49C3F6B7" FromRole="Courier" ToRole="Personal_Data" />
+    <NavigationProperty Name="Package" Relationship="Self.FK__Package__courier__6A30C649" FromRole="Courier" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="department_ID" />
+    </Key>
+    <Property Name="department_ID" Type="Int32" Nullable="false" />
+    <Property Name="department_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="indx" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="work_time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Package" Relationship="Self.FK__Package__departm__693CA210" FromRole="Department" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="package_ID" />
+    </Key>
+    <Property Name="package_ID" Type="Int32" Nullable="false" />
+    <Property Name="delivery_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="package_data_ID" Type="Int32" />
+    <Property Name="receipt_ID" Type="Int32" />
+    <Property Name="client_ID" Type="Int32" />
+    <Property Name="department_ID" Type="Int32" />
+    <Property Name="courier_ID" Type="Int32" />
+    <Property Name="sender_ID" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Package__client___68487DD7" FromRole="Package" ToRole="Client" />
+    <NavigationProperty Name="Courier" Relationship="Self.FK__Package__courier__6A30C649" FromRole="Package" ToRole="Courier" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Package__departm__693CA210" FromRole="Package" ToRole="Department" />
+    <NavigationProperty Name="Package_Data" Relationship="Self.FK__Package__package__66603565" FromRole="Package" ToRole="Package_Data" />
+    <NavigationProperty Name="Receipt" Relationship="Self.FK__Package__receipt__6754599E" FromRole="Package" ToRole="Receipt" />
+    <NavigationProperty Name="Sender" Relationship="Self.FK__Package__sender___6B24EA82" FromRole="Package" ToRole="Sender" />
+  </EntityType>
+  <EntityType Name="Package_Data">
+    <Key>
+      <PropertyRef Name="package_data_ID" />
+    </Key>
+    <Property Name="package_data_ID" Type="Int32" Nullable="false" />
+    <Property Name="send_date" Type="DateTime" Precision="0" />
+    <Property Name="arrival_date" Type="DateTime" Precision="0" />
+    <Property Name="receive_date" Type="DateTime" Precision="0" />
+    <Property Name="package_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="descript" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="weights" Type="Int32" />
+    <Property Name="volume" Type="Int32" />
+    <NavigationProperty Name="Package" Relationship="Self.FK__Package__package__66603565" FromRole="Package_Data" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="Personal_Data">
+    <Key>
+      <PropertyRef Name="data_ID" />
+    </Key>
+    <Property Name="data_ID" Type="Int32" Nullable="false" />
+    <Property Name="p_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="p_surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="p_secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="birth_date" Type="DateTime" Precision="0" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__data_ID__3D5E1FD2" FromRole="Personal_Data" ToRole="Client" />
+    <NavigationProperty Name="Courier" Relationship="Self.FK__Courier__data_ID__49C3F6B7" FromRole="Personal_Data" ToRole="Courier" />
+    <NavigationProperty Name="Sender" Relationship="Self.FK__Sender__data_ID__46E78A0C" FromRole="Personal_Data" ToRole="Sender" />
+  </EntityType>
+  <EntityType Name="Receipt">
+    <Key>
+      <PropertyRef Name="receipt_ID" />
+    </Key>
+    <Property Name="receipt_ID" Type="Int32" Nullable="false" />
+    <Property Name="payment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="delivery_price" Type="Int32" />
+    <Property Name="package_price" Type="Int32" />
+    <NavigationProperty Name="Package" Relationship="Self.FK__Package__receipt__6754599E" FromRole="Receipt" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="Sender">
+    <Key>
+      <PropertyRef Name="sender_ID" />
+    </Key>
+    <Property Name="sender_ID" Type="Int32" Nullable="false" />
+    <Property Name="data_ID" Type="Int32" />
+    <NavigationProperty Name="Package" Relationship="Self.FK__Package__sender___6B24EA82" FromRole="Sender" ToRole="Package" />
+    <NavigationProperty Name="Personal_Data" Relationship="Self.FK__Sender__data_ID__46E78A0C" FromRole="Sender" ToRole="Personal_Data" />
+  </EntityType>
+  <Association Name="FK__Auth__client_ID__6E01572D">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Auth" Type="Self.Auth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="client_ID" />
+      </Principal>
+      <Dependent Role="Auth">
+        <PropertyRef Name="client_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__card_ID__3E52440B">
+    <End Role="Bank_Card" Type="Self.Bank_Card" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank_Card">
+        <PropertyRef Name="card_ID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="card_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__data_ID__3D5E1FD2">
+    <End Role="Personal_Data" Type="Self.Personal_Data" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personal_Data">
+        <PropertyRef Name="data_ID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="data_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Package__client___68487DD7">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="client_ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="client_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Courier__data_ID__49C3F6B7">
+    <End Role="Personal_Data" Type="Self.Personal_Data" Multiplicity="0..1" />
+    <End Role="Courier" Type="Self.Courier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personal_Data">
+        <PropertyRef Name="data_ID" />
+      </Principal>
+      <Dependent Role="Courier">
+        <PropertyRef Name="data_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Package__courier__6A30C649">
+    <End Role="Courier" Type="Self.Courier" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courier">
+        <PropertyRef Name="courier_ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="courier_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Package__departm__693CA210">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="department_ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Package__package__66603565">
+    <End Role="Package_Data" Type="Self.Package_Data" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package_Data">
+        <PropertyRef Name="package_data_ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="package_data_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Package__receipt__6754599E">
+    <End Role="Receipt" Type="Self.Receipt" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receipt">
+        <PropertyRef Name="receipt_ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="receipt_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Package__sender___6B24EA82">
+    <End Role="Sender" Type="Self.Sender" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sender">
+        <PropertyRef Name="sender_ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="sender_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sender__data_ID__46E78A0C">
+    <End Role="Personal_Data" Type="Self.Personal_Data" Multiplicity="0..1" />
+    <End Role="Sender" Type="Self.Sender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personal_Data">
+        <PropertyRef Name="data_ID" />
+      </Principal>
+      <Dependent Role="Sender">
+        <PropertyRef Name="data_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SmartDeliveryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Auth" EntityType="Self.Auth" />
+    <EntitySet Name="Bank_Card" EntityType="Self.Bank_Card" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Courier" EntityType="Self.Courier" />
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="Package" EntityType="Self.Package" />
+    <EntitySet Name="Package_Data" EntityType="Self.Package_Data" />
+    <EntitySet Name="Personal_Data" EntityType="Self.Personal_Data" />
+    <EntitySet Name="Receipt" EntityType="Self.Receipt" />
+    <EntitySet Name="Sender" EntityType="Self.Sender" />
+    <AssociationSet Name="FK__Auth__client_ID__6E01572D" Association="Self.FK__Auth__client_ID__6E01572D">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Auth" EntitySet="Auth" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__card_ID__3E52440B" Association="Self.FK__Client__card_ID__3E52440B">
+      <End Role="Bank_Card" EntitySet="Bank_Card" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__data_ID__3D5E1FD2" Association="Self.FK__Client__data_ID__3D5E1FD2">
+      <End Role="Personal_Data" EntitySet="Personal_Data" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Package__client___68487DD7" Association="Self.FK__Package__client___68487DD7">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Courier__data_ID__49C3F6B7" Association="Self.FK__Courier__data_ID__49C3F6B7">
+      <End Role="Personal_Data" EntitySet="Personal_Data" />
+      <End Role="Courier" EntitySet="Courier" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Package__courier__6A30C649" Association="Self.FK__Package__courier__6A30C649">
+      <End Role="Courier" EntitySet="Courier" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Package__departm__693CA210" Association="Self.FK__Package__departm__693CA210">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Package__package__66603565" Association="Self.FK__Package__package__66603565">
+      <End Role="Package_Data" EntitySet="Package_Data" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Package__receipt__6754599E" Association="Self.FK__Package__receipt__6754599E">
+      <End Role="Receipt" EntitySet="Receipt" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Package__sender___6B24EA82" Association="Self.FK__Package__sender___6B24EA82">
+      <End Role="Sender" EntitySet="Sender" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sender__data_ID__46E78A0C" Association="Self.FK__Sender__data_ID__46E78A0C">
+      <End Role="Personal_Data" EntitySet="Personal_Data" />
+      <End Role="Sender" EntitySet="Sender" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

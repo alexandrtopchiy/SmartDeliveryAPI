@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="194f7a286d574ed0a327a47a14b330df" Name="Diagram1">
+        <EntityTypeShape EntityType="SmartDeliveryModel.Auth" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Bank_Card" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Client" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Courier" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Department" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Package" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Package_Data" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Personal_Data" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Receipt" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartDeliveryModel.Sender" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Auth__client_ID__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Client__card_ID__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Client__data_ID__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Package__client___68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Courier__data_ID__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Package__courier__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Package__departm__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Package__package__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Package__receipt__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Package__sender___6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartDeliveryModel.FK__Sender__data_ID__46E78A0C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

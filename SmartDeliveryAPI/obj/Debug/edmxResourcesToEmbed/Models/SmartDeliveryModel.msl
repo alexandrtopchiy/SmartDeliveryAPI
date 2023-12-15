@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище SmartDeliveryModelContainer" CdmEntityContainer="SmartDeliveryEntities">
+    <EntitySetMapping Name="Auth">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Auth">
+        <MappingFragment StoreEntitySet="Auth">
+          <ScalarProperty Name="auth_ID" ColumnName="auth_ID" />
+          <ScalarProperty Name="c_login" ColumnName="c_login" />
+          <ScalarProperty Name="c_password" ColumnName="c_password" />
+          <ScalarProperty Name="client_ID" ColumnName="client_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bank_Card">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Bank_Card">
+        <MappingFragment StoreEntitySet="Bank_Card">
+          <ScalarProperty Name="card_ID" ColumnName="card_ID" />
+          <ScalarProperty Name="card_number" ColumnName="card_number" />
+          <ScalarProperty Name="expiring_date" ColumnName="expiring_date" />
+          <ScalarProperty Name="cvv" ColumnName="cvv" />
+          <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="client_ID" ColumnName="client_ID" />
+          <ScalarProperty Name="data_ID" ColumnName="data_ID" />
+          <ScalarProperty Name="card_ID" ColumnName="card_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courier">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Courier">
+        <MappingFragment StoreEntitySet="Courier">
+          <ScalarProperty Name="courier_ID" ColumnName="courier_ID" />
+          <ScalarProperty Name="data_ID" ColumnName="data_ID" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="department_ID" ColumnName="department_ID" />
+          <ScalarProperty Name="department_status" ColumnName="department_status" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="indx" ColumnName="indx" />
+          <ScalarProperty Name="work_time" ColumnName="work_time" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Package">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Package">
+        <MappingFragment StoreEntitySet="Package">
+          <ScalarProperty Name="package_ID" ColumnName="package_ID" />
+          <ScalarProperty Name="delivery_type" ColumnName="delivery_type" />
+          <ScalarProperty Name="package_data_ID" ColumnName="package_data_ID" />
+          <ScalarProperty Name="receipt_ID" ColumnName="receipt_ID" />
+          <ScalarProperty Name="client_ID" ColumnName="client_ID" />
+          <ScalarProperty Name="department_ID" ColumnName="department_ID" />
+          <ScalarProperty Name="courier_ID" ColumnName="courier_ID" />
+          <ScalarProperty Name="sender_ID" ColumnName="sender_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Package_Data">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Package_Data">
+        <MappingFragment StoreEntitySet="Package_Data">
+          <ScalarProperty Name="package_data_ID" ColumnName="package_data_ID" />
+          <ScalarProperty Name="send_date" ColumnName="send_date" />
+          <ScalarProperty Name="arrival_date" ColumnName="arrival_date" />
+          <ScalarProperty Name="receive_date" ColumnName="receive_date" />
+          <ScalarProperty Name="package_status" ColumnName="package_status" />
+          <ScalarProperty Name="descript" ColumnName="descript" />
+          <ScalarProperty Name="weights" ColumnName="weights" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personal_Data">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Personal_Data">
+        <MappingFragment StoreEntitySet="Personal_Data">
+          <ScalarProperty Name="data_ID" ColumnName="data_ID" />
+          <ScalarProperty Name="p_name" ColumnName="p_name" />
+          <ScalarProperty Name="p_surname" ColumnName="p_surname" />
+          <ScalarProperty Name="p_secondname" ColumnName="p_secondname" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipt">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Receipt">
+        <MappingFragment StoreEntitySet="Receipt">
+          <ScalarProperty Name="receipt_ID" ColumnName="receipt_ID" />
+          <ScalarProperty Name="payment_status" ColumnName="payment_status" />
+          <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+          <ScalarProperty Name="delivery_price" ColumnName="delivery_price" />
+          <ScalarProperty Name="package_price" ColumnName="package_price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sender">
+      <EntityTypeMapping TypeName="SmartDeliveryModel.Sender">
+        <MappingFragment StoreEntitySet="Sender">
+          <ScalarProperty Name="sender_ID" ColumnName="sender_ID" />
+          <ScalarProperty Name="data_ID" ColumnName="data_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
