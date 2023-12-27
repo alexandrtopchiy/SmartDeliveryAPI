@@ -14,8 +14,8 @@ namespace SmartDeliveryAPI.Interfaces
 
         IEnumerable<CourierModel> GetCourierInfo(int courier_ID);
         IEnumerable<SenderModel> GetSenderInfo(int sender_ID);
-
-        Receipt PayForPackage(int receipt_ID);
+        string RequestCourier(int package_ID, int courier_ID, string adress);
+        string PayForPackage(int receipt_ID);
 
         List<DepartmentModel> GetAvaliableDepartmentsList();
         string AddNewPackage(PackageModel pd);

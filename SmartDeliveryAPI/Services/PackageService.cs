@@ -62,6 +62,8 @@ namespace SmartDeliveryAPI.Services
                                {
                                    department_ID = d.department_ID,
                                    department_status = d.department_status,
+                                   indx = d.indx,
+                                   phone_number = d.phone_number,
                                    adress = d.adress,
                                    city = d.city,
                                    work_time = d.work_time
@@ -72,7 +74,12 @@ namespace SmartDeliveryAPI.Services
                                    data_ID = s.data_ID.Value
                                }
                            }).ToList();
-            return res;
+                if (res == null)
+                {
+                    throw new InvalidOperationException("Error.Collection is empty");
+                }
+                  
+                return res;
 
             }
             catch (Exception)
@@ -107,10 +114,11 @@ namespace SmartDeliveryAPI.Services
                            });
                 return res;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return null;
+                Console.WriteLine(ex.Message);
+                return Enumerable.Empty<CourierModel>();
             }
         }
 
@@ -130,21 +138,22 @@ namespace SmartDeliveryAPI.Services
                                    p_name = pers.p_name,
                                    p_surname = pers.p_surname,
                                    p_secondname = pers.p_secondname,
-                                   birth_date = pers.birth_date.Value,
-                                   email = pers.email,
+                                 //  birth_date = pers.birth_date.Value,
+                                   //email = pers.email,
                                    phone_number = pers.phone_number
                                }
                            });
                 return res;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return null;
+                Console.WriteLine(ex.Message);
+                return Enumerable.Empty<SenderModel>();
             }
         }
 
-        public Receipt PayForPackage(int receipt_ID)    
+        public string PayForPackage(int receipt_ID)    
         {
             try
             {
@@ -152,11 +161,11 @@ namespace SmartDeliveryAPI.Services
                 rec.payment_status = "Payed";
                 rec.payment_method = "Card";
                 db.SaveChanges();
-                return rec;
+                return "Success";
             }
             catch (Exception)
             {
-                return null; ;
+                return null;
             }  
             
         }
@@ -177,6 +186,10 @@ namespace SmartDeliveryAPI.Services
                                phone_number=d.phone_number
                            }
                            ).ToList();
+                if (res == null)
+                {
+                    throw new InvalidOperationException("Error.Collection is empty");
+                }
                 return res;
             }
             catch (Exception)
@@ -187,18 +200,23 @@ namespace SmartDeliveryAPI.Services
 
         }
 
-        public List<int> GetPackageDataReceiptPackageMaxID()
+        public List<int> GetPackageDataReceiptPackageSenderPersonalMaxID()
         {
             try
             {
                 int r1 = db.Package_Data.Max(u => u.package_data_ID);
                 int r2 = db.Receipt.Max(u => u.receipt_ID);
                 int r3 = db.Package.Max(u => u.package_ID);
-
+                int r4 = db.Sender.Max(u => u.sender_ID);
+                int r5 = db.Personal_Data.Max(u => u.data_ID);
                 List<int> res = new List<int>();
+              
                 res.Add(r1);
                 res.Add(r2);
                 res.Add(r3);
+                res.Add(r4);
+                res.Add(r5);
+
 
                 return res;
             }
@@ -209,6 +227,23 @@ namespace SmartDeliveryAPI.Services
             }
         }
 
+        public string RequestCourier(int package_ID, int courier_ID, string adress)
+        {
+            var prof = (from pk in db.Package where pk.package_ID == package_ID select pk).First();
+
+            try
+            {
+                prof.courier_ID = courier_ID;
+                prof.delivery_type = adress;
+                db.SaveChanges();
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Error";
+                throw;
+            }
+        }
         public string AddNewPackage(PackageModel pd)
         {
             try
@@ -285,6 +320,50 @@ namespace SmartDeliveryAPI.Services
                 return "Error";
             }
 
+        }
+
+        public string AddNewSenderData(SenderModel rec)
+        {
+            try
+            {
+                Sender pack = new Sender()
+                {
+                    sender_ID = rec.sender_ID,
+                    data_ID = rec.data_ID
+                };
+
+                db.Sender.Add(pack);
+                db.SaveChanges();
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
+
+        }
+   
+        public string AddNewPersonalData(PersonalDataModel pd)
+        {
+            try
+            {
+                Personal_Data pack = new Personal_Data()
+                {
+                   data_ID=pd.data_ID,
+                   p_name = pd.p_name,
+                   p_secondname = pd.p_secondname,
+                   p_surname = pd.p_surname,
+                   phone_number = pd.phone_number
+                };
+
+                db.Personal_Data.Add(pack);
+                db.SaveChanges();
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
         }
     }
 }

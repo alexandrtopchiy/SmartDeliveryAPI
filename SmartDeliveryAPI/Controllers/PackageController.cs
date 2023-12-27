@@ -34,11 +34,11 @@ namespace SmartDeliveryAPI.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        [System.Web.Mvc.ActionName("GetPackageDataReceiptPackageMaxID")]
-        public IHttpActionResult GetPackageDataReceiptPackageMaxID()
+        [System.Web.Mvc.ActionName("GetPackageDataReceiptPackageSenderPersonalMaxID")]
+        public IHttpActionResult GetPackageDataReceiptPackageSenderPersonalMaxID()
         {
 
-            return Ok(serv.GetPackageDataReceiptPackageMaxID());
+            return Ok(serv.GetPackageDataReceiptPackageSenderPersonalMaxID());
         }
 
         [System.Web.Http.HttpGet]
@@ -66,7 +66,14 @@ namespace SmartDeliveryAPI.Controllers
 
             return Ok(serv.PayForPackage(receipt_ID));
         }
+       
+        [System.Web.Http.HttpPost]
+        [System.Web.Mvc.ActionName("RequestCourier")]
+        public IHttpActionResult RequestCourier(int package_ID, int courier_ID, string adress)
+        {
 
+            return Ok(serv.RequestCourier(package_ID, courier_ID, adress));
+        }
 
         //  ADD INFO
         [System.Web.Http.HttpPost]
@@ -93,5 +100,19 @@ namespace SmartDeliveryAPI.Controllers
             return Ok(serv.AddNewReceiptData(pd));
         }
 
+        [System.Web.Http.HttpPost]
+        [System.Web.Mvc.ActionName("AddNewSenderData")]
+        public IHttpActionResult AddNewSenderData(SenderModel pd)
+        {
+            return Ok(serv.AddNewSenderData(pd));
+        }
+
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Mvc.ActionName("AddNewPersonalData")]
+        public IHttpActionResult AddNewPersonalData(PersonalDataModel pd)
+        {
+            return Ok(serv.AddNewPersonalData(pd));
+        }
     }
 }

@@ -42,10 +42,10 @@ namespace SmartDeliveryAPI.Services
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                Console.WriteLine(ex.Message);
+                return Enumerable.Empty<ProfileInfo>();
             }
 
         }
@@ -68,10 +68,10 @@ namespace SmartDeliveryAPI.Services
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                Console.WriteLine(ex.Message);
+                return Enumerable.Empty<PersonalDataModel>();
             }
 
         }
@@ -94,10 +94,10 @@ namespace SmartDeliveryAPI.Services
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                Console.WriteLine(ex.Message);
+                return Enumerable.Empty<CardDataModel>();
             }
 
         }
@@ -138,7 +138,7 @@ namespace SmartDeliveryAPI.Services
                 db.SaveChanges();
                 return "Success";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "Error";
                 throw;
